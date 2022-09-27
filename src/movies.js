@@ -22,11 +22,15 @@ function howManyMovies(moviesArray) {
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
+  if (moviesArray.length === 0) {
+    return 0;
+  }
   let sumScores = moviesArray.reduce((acumulator, movie) => {
     return acumulator + movie.score;
   }, 0);
   let media = sumScores / moviesArray.length;
-  return media.toFixed(2);
+  return media;
+  //return media.toFixed(2); NO ENTIENDO PORQUE ME FALLA
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
@@ -34,17 +38,21 @@ function dramaMoviesScore(moviesArray) {
   let newListDrama = moviesArray.filter((movie) =>
     movie.genre.includes("Drama")
   );
+  if (newListDrama.length === 0) {
+    return 0;
+  }
   let sumDrama = newListDrama.reduce((acumulator, movie) => {
     return acumulator + movie.score;
   }, 0);
   let mediaDrama = sumDrama / newListDrama.length;
-  return mediaDrama.toFixed(2);
+  return mediaDrama;
+  //return mediaDrama.toFixed(2); NO ENTIENDO PORQUE ME FALLA
 }
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
-  let lista = structuredClone(moviesArray)
-    lista.sort((movie2, movie1) => {
+  let lista = structuredClone(moviesArray);
+  lista.sort((movie2, movie1) => {
     if (movie2.year > movie1.year) {
       return 1;
     } else if (movie2.year < movie1.year) {
@@ -58,21 +66,23 @@ function orderByYear(moviesArray) {
         return 0;
       }
     }
-  }); return lista
+  });
+  return lista;
 }
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(moviesArray) {
-let lista20 = structuredClone(moviesArray)
-lista20.sort((movie2, movie1) => {
+  let lista20 = structuredClone(moviesArray);
+  lista20.sort((movie2, movie1) => {
     if (movie2.title > movie1.title) {
-        return 1;
-      } else if (movie2.title < movie1.title) {
-        return -1;
-      } else {
-        return 0;
-      }
-}); return lista20.slice(0,20).map((movie) => movie.title)
+      return 1;
+    } else if (movie2.title < movie1.title) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+  return lista20.slice(0, 20).map((movie) => movie.title);
 }
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
